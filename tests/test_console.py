@@ -6,7 +6,6 @@ from console import HBNBCommand
 from unittest.mock import patch
 from io import StringIO
 from models import storage
-from console import Console
 import os
 
 
@@ -16,7 +15,7 @@ class ConsoleTestCase(unittest.TestCase):
 
     def setUp(self):
         """Set up for each test"""
-        self.console = Console()
+        self.console = HBNBCommand()
         self.console.onecmd("create State name=\"California\"")
 
 
