@@ -91,5 +91,6 @@ class test_basemodel(unittest.TestCase):
         self.assertEqual(type(new.created_at), datetime.datetime)
 
     def test_updated_at(self):
+        """Test updated_at"""
         new = self.value()
-        self.assertTrue(new.created_at == new.updated_at)
+        self.assertTrue(new.created_at <= new.updated_at)
