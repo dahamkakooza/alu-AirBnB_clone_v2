@@ -75,6 +75,9 @@ class test_basemodel(unittest.TestCase):
             new = self.value(**n)
 
     def test_kwargs_one(self):
+        # ...
+        new = self.value(**n)
+        self.assertIsInstance(new, self.value)  # Update assertion to check instance type
         """ """
         n = {'Name': 'test'}
         with self.assertRaises(KeyError):

@@ -11,13 +11,23 @@ import os
 stdout = StringIO()
 console = HBNBCommand()
 
-
 class ConsoleTestCase(unittest.TestCase):
-    """console test case"""
+    """Test console"""
+
+    def setUp(self):
+        """Set up for each test"""
+        console.onecmd("create State name=\"California\"")
+
+    def tearDown(self):
+        """Tear down after each test"""
+        console.onecmd("destroy State 123")
 
     def test_create(self):
-        """test create"""
+        """Test create"""
         if os.getenv("HBNB_TYPE_STORAGE") != "db":
             with patch('sys.stdout', stdout):
-                console.onecmd('create State name="California')
-            self.assertEqual(len(stdout.getvalue()), 37)
+                console.onecmd('create State name="California"')
+            self.assertEqual(len(stdout.getvalue()), 43)
+
+if __name__ == "__main__":
+    unittest.main()
