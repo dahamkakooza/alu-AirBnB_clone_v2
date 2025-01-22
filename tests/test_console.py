@@ -8,6 +8,7 @@ from io import StringIO
 from models import storage
 import os
 
+
 stdout = StringIO()
 console = HBNBCommand()
 
