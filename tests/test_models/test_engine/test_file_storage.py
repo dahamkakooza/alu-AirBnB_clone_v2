@@ -95,6 +95,14 @@ class test_fileStorage(unittest.TestCase):
         self.assertEqual(type(storage.all()), dict)
 
     def test_key_format(self):
+        # ...
+        temp = 'BaseModel' + '.' + _id
+        self.assertEqual(temp, 'BaseModel' + '.' + _id)
+    
+    def test_new(self):
+        # ...
+        temp = obj
+        self.assertTrue(temp is obj)
         """ Key is properly formatted """
         new = BaseModel()
         _id = new.to_dict()['id']
