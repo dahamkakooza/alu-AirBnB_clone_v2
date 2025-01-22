@@ -55,19 +55,16 @@ class test_fileStorage(unittest.TestCase):
         self.assertNotEqual(os.path.getsize('file.json'), 0)
 
     def test_save(self):
-        """ FileStorage save method """
-        new = BaseModel()
-        storage.save()
-        self.assertTrue(os.path.exists('file.json'))
+       new = self.value(email="john@gmail.com")
+    new.save()
+    self.assertIn(new.id, storage.all())
 
     def test_reload(self):
-        """ Storage file is successfully loaded to __objects """
-        new = BaseModel()
-        storage.save()
-        storage.reload()
-        for obj in storage.all().values():
-            loaded = obj
-        self.assertEqual(new.to_dict()['id'], loaded.to_dict()['id'])
+        new = self.value()
+    storage.save()
+    storage.reload()
+    loaded = storage.all()[new.id]
+    self.assertEqual(new.to_dict()['id'], loaded.to_dict()['id']) 
 
     def test_reload_empty(self):
         """ Load from an empty file """
@@ -95,20 +92,12 @@ class test_fileStorage(unittest.TestCase):
         self.assertEqual(type(storage.all()), dict)
 
     def test_key_format(self):
-        # ...
-        temp = 'BaseModel' + '.' + _id
-        self.assertEqual(temp, 'BaseModel' + '.' + _id)
+        temp = 'BaseModel' + '.' +self.value().id
+        self.assertEqual(len(temp),37)
     
     def test_new(self):
-        # ...
-        temp = obj
-        self.assertTrue(temp is obj)
-        """ Key is properly formatted """
-        new = BaseModel()
-        _id = new.to_dict()['id']
-        for key in storage.all().keys():
-            temp = key
-        self.assertEqual(temp, 'BaseModel' + '.' + _id)
+       obj = self.value()
+       self.assertIn(obj.id, storage.all())
 
     def test_storage_var_created(self):
         """ FileStorage object storage created """

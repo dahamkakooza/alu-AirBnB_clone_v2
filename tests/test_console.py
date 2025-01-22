@@ -6,6 +6,7 @@ from console import HBNBCommand
 from unittest.mock import patch
 from io import StringIO
 from models import storage
+from console import Console
 import os
 
 
