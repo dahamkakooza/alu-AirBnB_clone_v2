@@ -17,13 +17,17 @@ class ConsoleTestCase(unittest.TestCase):
 
 
     def setUp(self):
+
+
         """Set up for each test"""
         console.onecmd("create State name=\"California\"")
+
 
 
     def tearDown(self):
         """Tear down after each test"""
         console.onecmd("destroy State 123")
+
 
 
     def test_create(self):
