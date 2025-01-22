@@ -8,20 +8,23 @@ from io import StringIO
 from models import storage
 import os
 
-
 stdout = StringIO()
 console = HBNBCommand()
 
+
 class ConsoleTestCase(unittest.TestCase):
     """Test console"""
+
 
     def setUp(self):
         """Set up for each test"""
         console.onecmd("create State name=\"California\"")
 
+
     def tearDown(self):
         """Tear down after each test"""
         console.onecmd("destroy State 123")
+
 
     def test_create(self):
         """Test create"""
@@ -29,6 +32,7 @@ class ConsoleTestCase(unittest.TestCase):
             with patch('sys.stdout', stdout):
                 console.onecmd('create State name="California"')
             self.assertEqual(len(stdout.getvalue()), 43)
+
 
 if __name__ == "__main__":
     unittest.main()
