@@ -9,29 +9,24 @@ from models import storage
 from console import Console
 import os
 
-
 class ConsoleTestCase(unittest.TestCase):
     """Test console"""
 
-
     def setUp(self):
         """Set up for each test"""
-        console.onecmd("create State name=\"California\"")
-
+        self.console = Console()
+        self.console.onecmd("create State name=\"California\"")
 
     def tearDown(self):
         """Tear down after each test"""
-        console.onecmd("destroy State 123")
-
+        self.console.onecmd("destroy State 123")
 
     def test_create(self):
         """Test create"""
         if os.getenv("HBNB_TYPE_STORAGE") != "db":
-            with patch('sys.stdout', stdout):
-                console.onecmd('create State name="California"')
+            with patch('sys.stdout', new=StringIO()) as stdout:
+                self.console.onecmd('create State name="California"')
             self.assertEqual(len(stdout.getvalue()), 43)
-
 
 if __name__ == "__main__":
     unittest.main()
-

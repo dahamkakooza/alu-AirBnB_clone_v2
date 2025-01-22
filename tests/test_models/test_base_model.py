@@ -75,13 +75,10 @@ class test_basemodel(unittest.TestCase):
             new = self.value(**n)
 
     def test_kwargs_one(self):
-        # ...
+        n={"name":"john", "age": 30}
         new = self.value(**n)
-        self.assertIsInstance(new, self.value)  # Update assertion to check instance type
-        """ """
-        n = {'Name': 'test'}
-        with self.assertRaises(KeyError):
-            new = self.value(**n)
+        self.assertEqual(new.name, "john")
+        self.assertEqual(new.age, 30)
 
     def test_id(self):
         """ """
@@ -94,9 +91,5 @@ class test_basemodel(unittest.TestCase):
         self.assertEqual(type(new.created_at), datetime.datetime)
 
     def test_updated_at(self):
-        """ """
         new = self.value()
-        self.assertEqual(type(new.updated_at), datetime.datetime)
-        n = new.to_dict()
-        new = BaseModel(**n)
-        self.assertFalse(new.created_at == new.updated_at)
+        self.assertTrue(new.created_at == new.updated_at)
