@@ -1,23 +1,36 @@
 #!/usr/bin/python3
 """Test for console"""
-import unittest
 
+import unittest
 from console import HBNBCommand
 from unittest.mock import patch
 from io import StringIO
 from models import storage
 import os
 
-stdout = StringIO()
-console = HBNBCommand()
-
 
 class ConsoleTestCase(unittest.TestCase):
-    """console test case"""
+    """Test console"""
+
+
+    def setUp(self):
+        """Set up for each test"""
+        self.console = HBNBCommand()
+        self.console.onecmd("create State name=\"California\"")
+
+
+    def tearDown(self):
+        """Tear down after each test"""
+        self.console.onecmd("destroy State 123")
+
 
     def test_create(self):
-        """test create"""
+        """Test create"""
         if os.getenv("HBNB_TYPE_STORAGE") != "db":
-            with patch('sys.stdout', stdout):
-                console.onecmd('create State name="California')
-            self.assertEqual(len(stdout.getvalue()), 37)
+            with patch('sys.stdout', new=StringIO()) as stdout:
+                self.console.onecmd('create State name="California"')
+            self.assertEqual(len(stdout.getvalue()), 43)
+
+
+if __name__ == "__main__":
+    unittest.main()
